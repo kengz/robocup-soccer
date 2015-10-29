@@ -1,0 +1,16 @@
+{
+  "name": "robocup-soccer",
+  "version": "1.0.0",
+  "description": "robocup soccer simulation for the AI class",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kengz@bitbucket.org/kengz/robocup-soccer.git"
+  },
+  "author": "kengz",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/kengz/robocup-soccer#readme"
+}
