@@ -465,16 +465,23 @@ class WorldModel:
 
         return self.euclidean_distance(self.abs_coords, point)
 
+    # Keng-added
+    def get_angle_to_point(self, point):
+        """
+        Returns the relative angle to some point on the field from self.
+        """
+
+        # calculate absolute direction to point
+        # subtract from absolute body direction to get relative angle
+        return self.abs_body_dir - self.angle_between_points(self.abs_coords, point)
+
+    # Keng-added
     def turn_body_to_point(self, point):
         """
         Turns the agent's body to face a given point on the field.
         """
 
-        # calculate absolute direction to point
-        abs_point_dir = self.angle_between_points(self.abs_coords, point)
-
-        # subtract from absolute body direction to get relative angle
-        relative_dir = self.abs_body_dir - abs_point_dir
+        relative_dir = self.get_angle_to_point(point)
 
         # turn to that angle
         self.ah.turn(relative_dir)
@@ -534,6 +541,82 @@ class WorldModel:
         # return the nearest known teammate to the given point
         nearest = min(distances)[1]
         return nearest
+
+    # Keng-added
+    def get_nearest_teammate(self):
+        """
+        Returns the teammate player closest to self.
+        """
+
+        # holds tuples of (player dist to point, player)
+        distances = []
+        for p in self.players:
+            # skip enemy and unknwon players
+            if p.side != self.side:
+                continue
+
+            # find their absolute position
+            p_coords = self.get_object_absolute_coords(p)
+
+            distances.append((self.get_distance_to_point(p_coords), p))
+
+        # return the nearest known teammate to the given point
+        nearest = min(distances)[1]
+        return nearest
+
+    # Keng-added
+    def get_nearest_enemy(self):
+        """
+        Returns the enemy player closest to self.
+        """
+
+        # holds tuples of (player dist to point, player)
+        distances = []
+        for p in self.players:
+            # skip enemy and unknwon players
+            if p.side == self.side:
+                continue
+
+            # find their absolute position
+            p_coords = self.get_object_absolute_coords(p)
+
+            distances.append((self.get_distance_to_point(p_coords), p))
+
+        # return the nearest known teammate to the given point
+        nearest = min(distances)[1]
+        return nearest
+
+    # Keng-added
+    def is_ball_owned_by_us(self):
+        """
+        Returns if the ball is in possession by our team.
+        """
+
+        # holds tuples of (player dist to point, player)
+        for p in self.players:
+            # skip enemy and unknwon players
+            if p.side == self.side and p.is_ball_kickable():
+                return True
+            else:
+                continue
+
+        return False
+
+    # Keng-added
+    def is_ball_owned_by_enemy(self):
+        """
+        Returns if the ball is in possession by the enemy team.
+        """
+
+        # holds tuples of (player dist to point, player)
+        for p in self.players:
+            # skip enemy and unknwon players
+            if p.side != self.side and p.is_ball_kickable():
+                return True
+            else:
+                continue
+
+        return False
 
     def get_stamina(self):
         """
