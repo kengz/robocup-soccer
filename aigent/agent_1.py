@@ -14,6 +14,11 @@ from soccerpy.world_model import WorldModel
 # TURN = "turn"(rel_degrees in 360)
 # TURN_NECK = "turn_neck"(rel_direction)
 
+# potentially useful from aima
+# learning.py
+# mdp
+# 
+
 class Agent(baseAgent):
     """
     The extended Agent class with specific heuritics
@@ -83,7 +88,7 @@ class Agent(baseAgent):
                     if self.wm.ball is not None:
                         if (self.wm.ball.direction is not None and
                             -7 <= self.wm.ball.direction <= 7):
-                        self.wm.ah.dash(50)
+                            self.wm.ah.dash(50)
                     else:
                         self.wm.turn_body_to_point((0, 0))
 
@@ -114,3 +119,8 @@ class Agent(baseAgent):
                     self.wm.ah.turn(self.wm.ball.direction / 2)
 
                     return
+
+
+
+print dir(WorldModel(''))
+print dir(Agent())
