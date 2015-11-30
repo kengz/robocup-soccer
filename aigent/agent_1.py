@@ -36,6 +36,7 @@ class Agent(baseAgent):
 
         # take places on the field by uniform number
         if not self.in_kick_off_formation:
+            print "the side is", self.wm.side
 
             # used to flip x coords for other side
             side_mod = 1
