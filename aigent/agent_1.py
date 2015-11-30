@@ -147,10 +147,10 @@ class Agent(baseAgent):
         if q == None:
             return False
         q_coords = self.wm.get_object_absolute_coords(q)
-        qDir = self.wm.get_direction_to_point(q_coords)
+        qDir = self.wm.get_angle_to_point(q_coords)
         qDist = self.wm.get_distance_to_point(q_coords)
         
-        tDir = self.wm.get_direction_to_point(target_coords)
+        tDir = self.wm.get_angle_to_point(target_coords)
         tDist = self.wm.get_distance_to_point(target_coords)
 
         # the closest teammate is closer, or angle is clear
@@ -246,7 +246,7 @@ class Agent(baseAgent):
         if q == None:
             return False
         q_coords = self.wm.get_object_absolute_coords(q)
-        qDir = self.wm.get_direction_to_point(q_coords)
+        qDir = self.wm.get_angle_to_point(q_coords)
         qDistToOurGoal = self.wm.euclidean_distance(self.own_goal_pos, q_coords)
         # if close to the goal, aim at it
         if q.wm.is_ball_kickable() or qDistToOurGoal < 55:
@@ -320,7 +320,7 @@ class Agent(baseAgent):
 
 # Enum fields
 # self.get_distance_to_point(self.enemy_goal_pos)
-# self.get_direction_to_point(self.enemy_goal_pos)
+# self.get_angle_to_point(self.enemy_goal_pos)
 # self.wm.ball.distance
 # self.wm.ball.direction
 # p = self.get_nearest_teammate()
@@ -338,7 +338,7 @@ class Agent(baseAgent):
 # pass
 # move
 
-# print dir(WorldModel(''))
+print dir(WorldModel(''))
 # print dir(Agent())
 
 # va = 1
