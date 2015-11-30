@@ -147,6 +147,7 @@ class Agent(baseAgent):
                         if (self.wm.ball.direction is not None and
                                 -7 <= self.wm.ball.direction <= 7):
                             if self.wm.get_distance_to_point(self.own_goal_pos) < 40:
+                                return
                                 # self.wm.ah.dash(50)
                             else:
                                 self.wm.turn_body_to_point(self.own_goal_pos)
@@ -176,6 +177,7 @@ class Agent(baseAgent):
                 # move towards ball
                 if -7 <= self.wm.ball.direction <= 7:
                     if self.wm.get_distance_to_point(self.own_goal_pos) < 40:
+                        return
                         # self.wm.ah.dash(65)
                     else:
                         self.wm.turn_body_to_point(self.own_goal_pos)
