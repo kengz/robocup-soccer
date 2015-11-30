@@ -167,7 +167,7 @@ class Agent(baseAgent):
 
     # look around randomly
     def lookaround(self):
-        # print "lookaround"
+        print "lookaround"
         # kick off!
         if self.wm.is_before_kick_off():
             # player 9 takes the kick off
@@ -251,14 +251,14 @@ class Agent(baseAgent):
     # condition for dribbling, if can't shoot or pass
     def shall_dribble(self):
         # find the ball
-        # if self.wm.ball is None or self.wm.ball.direction is None:
-            # self.wm.ah.turn(30)
+        self.find_ball()
+        if self.wm.ball is None or self.wm.ball.direction is None:
+            self.wm.ah.turn(30)
         return self.wm.is_ball_kickable()
 
     # dribble: turn body, kick, then run towards ball
     def dribble(self):
         print "dribbling"
-        self.find_ball()
         # self.wm.turn_body_to_point(self.enemy_goal_pos)
         # self.wm.align_neck_with_body()
         self.wm.kick_to(self.enemy_goal_pos, 1.0)
