@@ -28,7 +28,7 @@ if __name__ == "__main__":
             4: A1,
             5: A1,
     		6: A1,
-    	}.get(position, A0)
+    	}.get(position, A1)
 
     # spawn an agent of team_name, with position
     def spawn_agent(team_name, position):

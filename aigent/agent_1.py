@@ -166,7 +166,7 @@ class Agent(baseAgent):
             self.wm.ah.turn(30)
             if not -7 <= self.wm.ball.direction <= 7:
                 self.wm.ah.turn(self.wm.ball.direction / 2)
-                
+
             return
 
         # # kick it at the enemy goal
@@ -184,8 +184,8 @@ class Agent(baseAgent):
         #     return
 
     # look around randomly
-    def lookaround(self):
-        # print "lookaround"
+    def defaultaction(self):
+        print "def"
         # kick off!
         if self.wm.is_before_kick_off():
             # player 9 takes the kick off
@@ -244,7 +244,7 @@ class Agent(baseAgent):
     # condition for passing to the closest teammate
     # if can kick ball, teammate is closer to goal, path clear
     def shall_pass(self):
-        # self.lookaround()
+        # self.defaultaction()
         p = self.wm.get_nearest_teammate()
         if p == None:
             return False
@@ -277,9 +277,9 @@ class Agent(baseAgent):
     # dribble: turn body, kick, then run towards ball
     def dribble(self):
         print "dribbling"
-        # self.wm.turn_body_to_point(self.enemy_goal_pos)
-        # self.wm.align_neck_with_body()
         self.wm.kick_to(self.enemy_goal_pos, 1.0)
+        self.wm.turn_body_to_point(self.enemy_goal_pos)
+        self.wm.align_neck_with_body()
         self.wm.ah.dash(50)
         return
 
@@ -298,7 +298,7 @@ class Agent(baseAgent):
 
     # defensive, when ball isn't ours, and has entered our side of the field
     def shall_move_to_defend(self):
-        # self.lookaround()
+        # self.defaultaction()
         if self.wm.ball is not None or self.wm.ball.direction is not None:
             b_coords = self.wm.get_object_absolute_coords(self.wm.ball)
             return self.wm.is_ball_owned_by_enemy() and self.wm.euclidean_distance(self.own_goal_pos, b_coords) < 55.0
@@ -359,10 +359,10 @@ class Agent(baseAgent):
             elif self.shall_move_to_enemy_goalpos():
                 return self.move_to_enemy_goalpos()
             else:
-                return self.lookaround()
+                return self.defaultaction()
         except:
-            print "exceptions thrown, using fallback"
-            self.lookaround()
+            # print "exceptions thrown, using fallback"
+            self.defaultaction()
         
 
 
