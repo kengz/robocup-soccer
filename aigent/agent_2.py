@@ -312,6 +312,9 @@ class Agent(baseAgent):
 
     def decisionLoop(self):
         try:
+            if self.wm.get_distance_to_point(self.own_goal_pos) > 40:
+                self.wm.turn_body_to_point(self.own_goal_pos)
+                self.wm.ah.dash(50)
             self.find_ball()
             # if should shoot, full power
             if self.shall_shoot():
