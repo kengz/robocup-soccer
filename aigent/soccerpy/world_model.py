@@ -548,7 +548,11 @@ class WorldModel:
 
         # holds tuples of (player dist to point, player)
         distances = []
+        print "checking from get_nearest_teammate"
+        print self.side
         for p in self.players:
+            print p.side
+            print p.side == self.side
             # skip enemy and unknwon players
             if p.side == self.side:
                 # find their absolute position
@@ -556,6 +560,7 @@ class WorldModel:
 
                 distances.append((self.get_distance_to_point(p_coords), p))
 
+        print "finally", distances
         # return the nearest known teammate to the given point
         nearest = min(distances)[1]
         return nearest
