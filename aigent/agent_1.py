@@ -253,7 +253,7 @@ class Agent(baseAgent):
 
     # if enemy has the ball, and not too far move towards it
     def shall_move_to_ball(self):
-        while self.wm.ball is None or self.wm.ball.direction is None:
+        while self.wm.ball is None:
             self.find_ball()
         self.wm.align_neck_with_body()
         return self.wm.is_ball_owned_by_enemy() and self.wm.ball.distance < 30
