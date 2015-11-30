@@ -39,7 +39,7 @@ class Agent(baseAgent):
 
             # used to flip x coords for other side
             side_mod = 1
-            self.wm.side == WorldModel.SIDE_L
+            self.wm.side = WorldModel.SIDE_L
             if self.wm.side == WorldModel.SIDE_R:
                 self.wm.side = WorldModel.SIDE_R
                 side_mod = -1
