@@ -281,21 +281,24 @@ class WorldModel:
         and relative to the positive x-axis.
         """
 
-        x1 = point1[0]
-        y1 = point1[1]
-        x2 = point2[0]
-        y2 = point2[1]
+        try:
+            x1 = point1[0]
+            y1 = point1[1]
+            x2 = point2[0]
+            y2 = point2[1]
 
-        # get components of vector between the points
-        dx = x2 - x1
-        dy = y2 - y1
+            # get components of vector between the points
+            dx = x2 - x1
+            dy = y2 - y1
 
-        # return the angle in degrees
-        a = math.degrees(math.atan2(dy, dx))
-        if a < 0:
-            a = 360 + a
-
-        return a
+            # return the angle in degrees
+            a = math.degrees(math.atan2(dy, dx))
+            if a < 0:
+                a = 360 + a
+    
+            return a
+        except:
+            return 0
 
     def process_new_info(self, ball, flags, goals, players, lines):
         """

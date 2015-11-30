@@ -282,7 +282,7 @@ class Agent(baseAgent):
         qDir = self.wm.get_angle_to_point(q_coords)
         qDistToOurGoal = self.wm.euclidean_distance(self.own_goal_pos, q_coords)
         # if close to the goal, aim at it
-        if q.wm.is_ball_kickable() or qDistToOurGoal < 55:
+        if qDistToOurGoal < 55:
             self.wm.turn_body_to_point(q_coords)
         # otherwise aim at own goalpos, run there to defend
         else:
