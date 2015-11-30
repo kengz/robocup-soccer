@@ -25,10 +25,10 @@ if __name__ == "__main__":
     def agent_type(position):
     	return {
             2: A2,
-            3: A2,
+            3: A3,
             4: A2,
             6: A2,
-            6: A2,
+            7: A2,
     		8: A2,
     	}.get(position, A1)
 

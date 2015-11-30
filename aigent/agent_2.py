@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# The defender agent
+
 import random
 from soccerpy.agent import Agent as baseAgent
 from soccerpy.world_model import WorldModel
