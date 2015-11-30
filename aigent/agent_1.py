@@ -185,7 +185,7 @@ class Agent(baseAgent):
 
     # look around randomly
     def lookaround(self):
-        print "lookaround"
+        # print "lookaround"
         # kick off!
         if self.wm.is_before_kick_off():
             # player 9 takes the kick off
@@ -244,7 +244,7 @@ class Agent(baseAgent):
     # condition for passing to the closest teammate
     # if can kick ball, teammate is closer to goal, path clear
     def shall_pass(self):
-        self.lookaround()
+        # self.lookaround()
         p = self.wm.get_nearest_teammate()
         if p == None:
             return False
@@ -298,7 +298,7 @@ class Agent(baseAgent):
 
     # defensive, when ball isn't ours, and has entered our side of the field
     def shall_move_to_defend(self):
-        self.lookaround()
+        # self.lookaround()
         if self.wm.ball is not None or self.wm.ball.direction is not None:
             b_coords = self.wm.get_object_absolute_coords(self.wm.ball)
             return self.wm.is_ball_owned_by_enemy() and self.wm.euclidean_distance(self.own_goal_pos, b_coords) < 55.0
