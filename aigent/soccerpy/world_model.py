@@ -489,6 +489,11 @@ class WorldModel:
 
         relative_dir = self.get_angle_to_point(point)
 
+        if relative_dir > 180:
+            relative_dir = relative_dir - 180
+        elif relative_dir < -180:
+            relative_dir = relative_dir + 180
+
         # turn to that angle
         self.ah.turn(relative_dir)
 
