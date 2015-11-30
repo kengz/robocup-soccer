@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import random
 from soccerpy.agent import Agent as baseAgent
 from soccerpy.world_model import WorldModel
 
@@ -143,6 +144,8 @@ class Agent(baseAgent):
     # check if path to target's coordinate is clear, by direction
     def is_clear(self, target_coords):
         q = self.wm.get_nearest_enemy()
+        if q == None:
+            return False
         q_coords = self.wm.get_object_absolute_coords(q)
         qDir = self.wm.get_direction_to_point(q_coords)
         qDist = self.wm.get_distance_to_point(q_coords)
@@ -161,7 +164,11 @@ class Agent(baseAgent):
         # find the ball`
         if self.wm.ball is None or self.wm.ball.direction is None:
             self.wm.ah.turn(10)
-            self.wm.align_neck_with_body()
+
+    # look around randomly
+    def lookaround(self):
+        self.wm.ah.turn(random.randrange(-30,30))
+        return
 
     # condition for shooting to the goal
     def shall_shoot(self):
@@ -174,7 +181,10 @@ class Agent(baseAgent):
     # condition for passing to the closest teammate
     # if can kick ball, teammate is closer to goal, path clear
     def shall_pass(self):
+        self.lookaround()
         p = self.wm.get_nearest_teammate()
+        if p == None:
+            return False
         p_coords = self.wm.get_object_absolute_coords(p)
         pDistToGoal = self.wm.euclidean_distance(p_coords, self.enemy_goal_pos)
         myDistToGoal = self.wm.get_distance_to_point(self.enemy_goal_pos)
@@ -184,6 +194,8 @@ class Agent(baseAgent):
     # do passes
     def passes(self):
         p = self.wm.get_nearest_teammate()
+        if p == None:
+            return False
         p_coords = self.wm.get_object_absolute_coords(p)
         dist = self.wm.get_distance_to_point(p_coords)
         power_ratio = 2*dist/55.0
@@ -216,6 +228,7 @@ class Agent(baseAgent):
 
     # defensive, when ball isn't ours, and has entered our side of the field
     def shall_move_to_defend(self):
+        self.lookaround()
         if self.wm.ball is not None or self.wm.ball.direction is not None:
             b_coords = self.wm.get_object_absolute_coords(self.wm.ball)
             return self.wm.is_ball_owned_by_enemy() and self.wm.euclidean_distance(self.own_goal_pos, b_coords) < 55.0
@@ -224,6 +237,8 @@ class Agent(baseAgent):
     # defend
     def move_to_defend(self):
         q = self.wm.get_nearest_enemy()
+        if q == None:
+            return False
         q_coords = self.wm.get_object_absolute_coords(q)
         qDir = self.wm.get_direction_to_point(q_coords)
         qDistToOurGoal = self.wm.euclidean_distance(self.own_goal_pos, q_coords)
@@ -249,6 +264,7 @@ class Agent(baseAgent):
         self.wm.ah.dash(70)
         return
 
+
     def decisionLoop(self):
         self.find_ball()
         # if should shoot, full power
@@ -266,7 +282,9 @@ class Agent(baseAgent):
             return move_to_defend()
         elif shall_move_to_enemy_goalpos():
             return move_to_enemy_goalpos()
-        return
+        else:
+            return self.lookaround()
+        
 
 
 # by role: striker, defender
@@ -316,3 +334,7 @@ class Agent(baseAgent):
 
 # print dir(WorldModel(''))
 # print dir(Agent())
+
+# va = 1
+# print None or va[0]
+# print random.randrange(-30,30)

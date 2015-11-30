@@ -537,8 +537,11 @@ class WorldModel:
                 distances.append((self.euclidean_distance(point, p_coords), p))
 
         # return the nearest known teammate to the given point
-        nearest = min(distances)[1]
-        return nearest
+        try:
+            nearest = min(distances)[1]
+            return nearest
+        except:
+            return None
 
     # Keng-added
     def get_nearest_teammate(self):
@@ -549,7 +552,7 @@ class WorldModel:
         # holds tuples of (player dist to point, player)
         distances = []
         print "checking from get_nearest_teammate"
-        print self.side
+        print "selfside", self.side
         for p in self.players:
             print p.side
             print p.side == self.side
@@ -562,8 +565,11 @@ class WorldModel:
 
         print "finally", distances
         # return the nearest known teammate to the given point
-        nearest = min(distances)[1]
-        return nearest
+        try:
+            nearest = min(distances)[1]
+            return nearest
+        except:
+            return None
 
     # Keng-added
     def get_nearest_enemy(self):
@@ -582,8 +588,11 @@ class WorldModel:
                 distances.append((self.get_distance_to_point(p_coords), p))
 
         # return the nearest known teammate to the given point
-        nearest = min(distances)[1]
-        return nearest
+        try:
+            nearest = min(distances)[1]
+            return nearest
+        except:
+            return None
 
     # Keng-added
     def is_ball_owned_by_us(self):
