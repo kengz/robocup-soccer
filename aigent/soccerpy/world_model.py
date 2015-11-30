@@ -263,12 +263,15 @@ class WorldModel:
         Returns the Euclidean distance between two points on a plane.
         """
 
-        x1 = point1[0]
-        y1 = point1[1]
-        x2 = point2[0]
-        y2 = point2[1]
-
-        return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+        try:
+            x1 = point1[0]
+            y1 = point1[1]
+            x2 = point2[0]
+            y2 = point2[1]
+    
+            return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+        except:
+            return 200
 
     def angle_between_points(self, point1, point2):
         """
