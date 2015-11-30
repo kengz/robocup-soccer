@@ -37,6 +37,11 @@ class Agent:
         # whether we should send commands
         self.__send_commands = False
 
+        # adding goal post markers
+        self.enemy_goal_pos = None
+        self.own_goal_pos = None
+
+
     def connect(self, host, port, teamname, version=11):
         """
         Gives us a connection to the server as one player on a team.  This
