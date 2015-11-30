@@ -79,8 +79,9 @@ class Agent(baseAgent):
             self.enemy_goal_pos = (55, 0)
             self.own_goal_pos = (-55, 0)
 
-        # The main decision loop
-        return self.decisionLoop()
+        else:
+            # The main decision loop
+            return self.decisionLoop()
 
         # # kick off!
         # if self.wm.is_before_kick_off():
