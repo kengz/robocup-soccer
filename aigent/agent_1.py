@@ -267,9 +267,9 @@ class Agent(baseAgent):
     # condition for dribbling, if can't shoot or pass
     def shall_dribble(self):
         # find the ball
-        self.find_ball()
-        if self.wm.ball is None or self.wm.ball.direction is None:
-            self.wm.ah.turn(30)
+        # self.find_ball()
+        # if self.wm.ball is None or self.wm.ball.direction is None:
+            # self.wm.ah.turn(30)
         return self.wm.is_ball_kickable()
 
     # dribble: turn body, kick, then run towards ball
@@ -283,9 +283,9 @@ class Agent(baseAgent):
 
     # if enemy has the ball, and not too far move towards it
     def shall_move_to_ball(self):
-        while self.wm.ball is None:
-            self.find_ball()
-        self.wm.align_neck_with_body()
+        # while self.wm.ball is None:
+            # self.find_ball()
+        # self.wm.align_neck_with_body()
         return self.wm.is_ball_owned_by_enemy() and self.wm.ball.distance < 30
 
     # move to ball, if enemy owns it
@@ -339,27 +339,27 @@ class Agent(baseAgent):
 
 
     def decisionLoop(self):
-        # try:
-        #     self.find_ball()
-        #     # if should shoot, full power
-        #     if self.shall_shoot():
-        #         return self.shoot()
-        #     # else shd pass to closest teammate
-        #     elif self.shall_pass():
-        #         return self.passes()
-        #     # else shd dribble
-        #     elif self.shall_dribble():
-        #         return self.dribble()
-        #     elif self.shall_move_to_ball():
-        #         return self.move_to_ball()
-        #     elif self.shall_move_to_defend():
-        #         return self.move_to_defend()
-        #     elif self.shall_move_to_enemy_goalpos():
-        #         return self.move_to_enemy_goalpos()
-        #     else:
-        #         return self.lookaround()
-        # except:
-        #     print "exceptions thrown, using fallback"
+        try:
+            self.find_ball()
+            # if should shoot, full power
+            if self.shall_shoot():
+                return self.shoot()
+            # else shd pass to closest teammate
+            elif self.shall_pass():
+                return self.passes()
+            # else shd dribble
+            elif self.shall_dribble():
+                return self.dribble()
+            elif self.shall_move_to_ball():
+                return self.move_to_ball()
+            elif self.shall_move_to_defend():
+                return self.move_to_defend()
+            elif self.shall_move_to_enemy_goalpos():
+                return self.move_to_enemy_goalpos()
+            else:
+                return self.lookaround()
+        except:
+            print "exceptions thrown, using fallback"
             self.lookaround()
         
 
