@@ -168,17 +168,38 @@ class Agent(baseAgent):
     # look around randomly
     def lookaround(self):
         # print "lookaround"
-        self.wm.ah.turn(random.randrange(-30,30))
-        if self.wm.ball is not None:
-            if (self.wm.ball.direction is not None and -7 <= self.wm.ball.direction <= 7):
+        # self.wm.ah.turn(random.randrange(-30,30))
+        # if self.wm.ball is not None:
+        #     if (self.wm.ball.direction is not None and -7 <= self.wm.ball.direction <= 7):
+        #         self.wm.ah.dash(65)
+        #     else:
+        #         # face ball
+        #         self.wm.ah.turn(self.wm.ball.direction / 2)
+
+        # if self.wm.is_ball_kickable():
+        #     self.wm.kick_to(self.enemy_goal_pos, 0.5)
+        # return
+
+
+        # find the ball
+        if self.wm.ball is None or self.wm.ball.direction is None:
+            self.wm.ah.turn(random.randrange(-30,30))
+
+            return
+
+        # kick it at the enemy goal
+        if self.wm.is_ball_kickable():
+            self.wm.kick_to(goal_pos, 1.0)
+            return
+        else:
+            # move towards ball
+            if -7 <= self.wm.ball.direction <= 7:
                 self.wm.ah.dash(65)
             else:
                 # face ball
                 self.wm.ah.turn(self.wm.ball.direction / 2)
 
-        if self.wm.is_ball_kickable():
-            self.wm.kick_to(self.enemy_goal_pos, 0.5)
-        return
+            return
 
     # condition for shooting to the goal
     def shall_shoot(self):
