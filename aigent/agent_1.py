@@ -178,7 +178,7 @@ class Agent(baseAgent):
 
     # condition for shooting to the goal
     def shall_shoot(self):
-        return self.wm.is_ball_kickable() and self.goal_pos_close() and self.is_clear(self.enemy_goal_pos)
+        return self.wm.is_ball_kickable() and self.goalpos_close() and self.is_clear(self.enemy_goal_pos)
 
     # do shoot
     def shoot(self):
@@ -214,6 +214,7 @@ class Agent(baseAgent):
 
     # dribble: turn body, kick, then run towards ball
     def dribble(self):
+        print "dribbling"
         self.wm.turn_body_to_point(self.enemy_goal_pos)
         self.wm.align_neck_with_body()
         self.wm.kick_to(self.enemy_goal_pos, 0.3)
