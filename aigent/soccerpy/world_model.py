@@ -594,7 +594,7 @@ class WorldModel:
         # holds tuples of (player dist to point, player)
         for p in self.players:
             # skip enemy and unknwon players
-            if p.side == self.side and self.euclidean_distance(self.ball, self.get_object_absolute_coords(p)) < self.server_parameters.kickable_margin:
+            if p.side == self.side and self.euclidean_distance(self.get_object_absolute_coords(self.ball), self.get_object_absolute_coords(p)) < self.server_parameters.kickable_margin:
                 return True
             else:
                 continue
@@ -610,7 +610,7 @@ class WorldModel:
         # holds tuples of (player dist to point, player)
         for p in self.players:
             # skip enemy and unknwon players
-            if p.side != self.side and self.euclidean_distance(self.ball, self.get_object_absolute_coords(p)) < self.server_parameters.kickable_margin:
+            if p.side != self.side and self.euclidean_distance(self.get_object_absolute_coords(self.ball), self.get_object_absolute_coords(p)) < self.server_parameters.kickable_margin:
                 return True
             else:
                 continue

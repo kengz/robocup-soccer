@@ -20,10 +20,10 @@ if __name__ == "__main__":
 
     # return type of agent: midfield, striker etc.
     def agent_type(position):
-    	return {
-    		# '0': A0,
-    		'1': A1,
-    	}.get(position, A1)
+        return {
+            # '0': A0,
+            '1': A1,
+        }.get(position, A1)
 
     # spawn an agent of team_name, with position
     def spawn_agent(team_name, position):
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # spawn all agents as seperate processes for maximum processing efficiency
     agentthreads = []
-    for position in xrange(NUM_PLAYERS):
+    for position in xrange(1, NUM_PLAYERS+1):
         print "  Spawning agent %d..." % position
 
         at = mp.Process(target=spawn_agent, args=(TEAM_NAME, position))
