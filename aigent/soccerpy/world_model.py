@@ -347,7 +347,7 @@ class WorldModel:
         ko_left = WorldModel.PlayModes.KICK_OFF_L
         ko_right = WorldModel.PlayModes.KICK_OFF_R
 
-        print self.play_mode
+        # print self.play_mode
 
         # return whether we're on the side that's kicking off
         return (self.side == WorldModel.SIDE_L and self.play_mode == ko_left or
@@ -565,11 +565,11 @@ class WorldModel:
 
         # holds tuples of (player dist to point, player)
         distances = []
-        print "checking from get_nearest_teammate"
-        print "selfside", self.side
+        # print "checking from get_nearest_teammate"
+        # print "selfside", self.side
         for p in self.players:
-            print p.side
-            print p.side == self.side
+            # print p.side
+            # print p.side == self.side
             # skip enemy and unknwon players
             if p.side == self.side:
                 # find their absolute position
@@ -577,7 +577,7 @@ class WorldModel:
 
                 distances.append((self.get_distance_to_point(p_coords), p))
 
-        print "finally", distances
+        # print "finally", distances
         # return the nearest known teammate to the given point
         try:
             nearest = min(distances)[1]

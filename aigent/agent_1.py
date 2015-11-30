@@ -167,6 +167,7 @@ class Agent(baseAgent):
 
     # look around randomly
     def lookaround(self):
+        print "lookaround"
         self.wm.ah.turn(random.randrange(-30,30))
         if self.wm.ball is not None or self.wm.ball.direction is not None:
             if -7 <= self.wm.ball.direction <= 7:
@@ -185,6 +186,7 @@ class Agent(baseAgent):
 
     # do shoot
     def shoot(self):
+        print "shoot"
         return self.wm.kick_to(self.enemy_goal_pos, 1.0)
 
     # condition for passing to the closest teammate
@@ -202,6 +204,7 @@ class Agent(baseAgent):
 
     # do passes
     def passes(self):
+        print "pass"
         p = self.wm.get_nearest_teammate()
         if p == None:
             return False
@@ -233,6 +236,7 @@ class Agent(baseAgent):
 
     # move to ball, if enemy owns it
     def move_to_ball(self):
+        print "move_to_ball"
         self.wm.ah.dash(60)
         return 
 
@@ -246,6 +250,7 @@ class Agent(baseAgent):
 
     # defend
     def move_to_defend(self):
+        print "move_to_defend"
         q = self.wm.get_nearest_enemy()
         if q == None:
             return False
@@ -269,6 +274,7 @@ class Agent(baseAgent):
 
     # if our team has the ball n u r striker
     def move_to_enemy_goalpos(self):
+        print "move_to_enemy_goalpos"
         self.wm.turn_body_to_point(self.enemy_goal_pos)
         self.wm.align_neck_with_body()
         self.wm.ah.dash(70)
