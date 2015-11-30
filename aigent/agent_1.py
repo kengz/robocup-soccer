@@ -332,8 +332,8 @@ class Agent(baseAgent):
             # elif self.shall_pass():
                 # return self.passes()
             # else shd dribble
-            elif self.shall_dribble():
-                return self.dribble()
+            # elif self.shall_dribble():
+                # return self.dribble()
             elif self.shall_move_to_ball():
                 return self.move_to_ball()
             # elif self.shall_move_to_defend():
