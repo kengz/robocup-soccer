@@ -339,27 +339,27 @@ class Agent(baseAgent):
 
 
     def decisionLoop(self):
-        try:
-            self.find_ball()
-            # if should shoot, full power
-            if self.shall_shoot():
-                return self.shoot()
-            # else shd pass to closest teammate
-            elif self.shall_pass():
-                return self.passes()
-            # else shd dribble
-            elif self.shall_dribble():
-                return self.dribble()
-            elif self.shall_move_to_ball():
-                return self.move_to_ball()
-            elif self.shall_move_to_defend():
-                return self.move_to_defend()
-            elif self.shall_move_to_enemy_goalpos():
-                return self.move_to_enemy_goalpos()
-            else:
-                return self.lookaround()
-        except:
-            print "exceptions thrown, using fallback"
+        # try:
+        #     self.find_ball()
+        #     # if should shoot, full power
+        #     if self.shall_shoot():
+        #         return self.shoot()
+        #     # else shd pass to closest teammate
+        #     elif self.shall_pass():
+        #         return self.passes()
+        #     # else shd dribble
+        #     elif self.shall_dribble():
+        #         return self.dribble()
+        #     elif self.shall_move_to_ball():
+        #         return self.move_to_ball()
+        #     elif self.shall_move_to_defend():
+        #         return self.move_to_defend()
+        #     elif self.shall_move_to_enemy_goalpos():
+        #         return self.move_to_enemy_goalpos()
+        #     else:
+        #         return self.lookaround()
+        # except:
+        #     print "exceptions thrown, using fallback"
             self.lookaround()
         
 
