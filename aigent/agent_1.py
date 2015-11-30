@@ -163,7 +163,7 @@ class Agent(baseAgent):
     def find_ball(self):
         # find the ball`
         if self.wm.ball is None or self.wm.ball.direction is None:
-            self.wm.ah.turn(10)
+            self.wm.ah.turn(30)
 
     # look around randomly
     def lookaround(self):
@@ -299,6 +299,9 @@ class Agent(baseAgent):
     # if our team has the ball n u r striker
     def move_to_enemy_goalpos(self):
         print "move_to_enemy_goalpos"
+        if self.wm.is_ball_kickable():
+            # kick with 100% extra effort at enemy goal
+            self.wm.kick_to(self.enemy_goal_pos, 1.0)
         self.wm.turn_body_to_point(self.enemy_goal_pos)
         self.wm.align_neck_with_body()
         self.wm.ah.dash(70)
