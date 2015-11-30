@@ -280,7 +280,7 @@ class Agent(baseAgent):
             return self.move_to_ball()
         elif self.shall_move_to_defend():
             return move_to_defend()
-        elif shall_move_to_enemy_goalpos():
+        elif self.shall_move_to_enemy_goalpos():
             return move_to_enemy_goalpos()
         else:
             return self.lookaround()
