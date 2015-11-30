@@ -333,7 +333,20 @@ class WorldModel:
         """
         Tells us whether it's play time
         """
-        return self.play_mode == WorldModel.PlayModes.PLAY_ON
+        return self.play_mode == WorldModel.PlayModes.PLAY_ON or
+        self.play_mode == WorldModel.PlayModes.KICK_OFF_L or
+        self.play_mode == WorldModel.PlayModes.KICK_OFF_R or
+        self.play_mode == WorldModel.PlayModes.KICK_IN_L or
+        self.play_mode == WorldModel.PlayModes.KICK_IN_R or
+        self.play_mode == WorldModel.PlayModes.FREE_KICK_L or
+        self.play_mode == WorldModel.PlayModes.FREE_KICK_R or
+        self.play_mode == WorldModel.PlayModes.CORNER_KICK_L or
+        self.play_mode == WorldModel.PlayModes.CORNER_KICK_R or
+        self.play_mode == WorldModel.PlayModes.GOAL_KICK_L or
+        self.play_mode == WorldModel.PlayModes.GOAL_KICK_R or
+        self.play_mode == WorldModel.PlayModes.DROP_BALL or
+        self.play_mode == WorldModel.PlayModes.OFFSIDE_L or
+        self.play_mode == WorldModel.PlayModes.OFFSIDE_R
 
     def is_before_kick_off(self):
         """
