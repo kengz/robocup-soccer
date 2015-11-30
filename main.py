@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # spawn all agents as seperate processes for maximum processing efficiency
     agentthreads = []
-    for position in xrange(NUM_PLAYERS):
+    for position in xrange(1, NUM_PLAYERS+1):
         print "  Spawning agent %d..." % position
 
         at = mp.Process(target=spawn_agent, args=(TEAM_NAME, position))
