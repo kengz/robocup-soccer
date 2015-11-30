@@ -168,39 +168,6 @@ class Agent(baseAgent):
     # look around randomly
     def lookaround(self):
         # print "lookaround"
-        # self.wm.ah.turn(random.randrange(-30,30))
-        # if self.wm.ball is not None:
-        #     if (self.wm.ball.direction is not None and -7 <= self.wm.ball.direction <= 7):
-        #         self.wm.ah.dash(65)
-        #     else:
-        #         # face ball
-        #         self.wm.ah.turn(self.wm.ball.direction / 2)
-
-        # if self.wm.is_ball_kickable():
-        #     self.wm.kick_to(self.enemy_goal_pos, 0.5)
-        # return
-
-
-        # # find the ball
-        # if self.wm.ball is None or self.wm.ball.direction is None:
-        #     self.wm.ah.turn(random.randrange(-30,30))
-
-        #     return
-
-        # # kick it at the enemy goal
-        # if self.wm.is_ball_kickable():
-        #     self.wm.kick_to(self.enemy_goal_pos, 1.0)
-        #     return
-        # else:
-        #     # move towards ball
-        #     if -7 <= self.wm.ball.direction <= 7:
-        #         self.wm.ah.dash(65)
-        #     else:
-        #         # face ball
-        #         self.wm.ah.turn(self.wm.ball.direction / 2)
-
-        #     return
-
         # kick off!
         if self.wm.is_before_kick_off():
             # player 9 takes the kick off
@@ -291,6 +258,7 @@ class Agent(baseAgent):
     # dribble: turn body, kick, then run towards ball
     def dribble(self):
         print "dribbling"
+        self.find_ball()
         # self.wm.turn_body_to_point(self.enemy_goal_pos)
         # self.wm.align_neck_with_body()
         self.wm.kick_to(self.enemy_goal_pos, 1.0)
@@ -361,64 +329,22 @@ class Agent(baseAgent):
             if self.shall_shoot():
                 return self.shoot()
             # else shd pass to closest teammate
-            elif self.shall_pass():
-                return self.passes()
+            # elif self.shall_pass():
+                # return self.passes()
             # else shd dribble
             elif self.shall_dribble():
                 return self.dribble()
             elif self.shall_move_to_ball():
                 return self.move_to_ball()
-            elif self.shall_move_to_defend():
-                return self.move_to_defend()
-            elif self.shall_move_to_enemy_goalpos():
-                return self.move_to_enemy_goalpos()
+            # elif self.shall_move_to_defend():
+                # return self.move_to_defend()
+            # elif self.shall_move_to_enemy_goalpos():
+                # return self.move_to_enemy_goalpos()
             else:
                 return self.lookaround()
         except:
-              # kick off!
-            if self.wm.is_before_kick_off():
-                # player 9 takes the kick off
-                if self.wm.uniform_number == 9:
-                    if self.wm.is_ball_kickable():
-                        # kick with 100% extra effort at enemy goal
-                        self.wm.kick_to(self.enemy_goal_pos, 1.0)
-                    else:
-                        # move towards ball
-                        if self.wm.ball is not None:
-                            if (self.wm.ball.direction is not None and
-                                    -7 <= self.wm.ball.direction <= 7):
-                                self.wm.ah.dash(50)
-                            else:
-                                self.wm.turn_body_to_point((0, 0))
-    
-                    # turn to ball if we can see it, else face the enemy    goal
-                    if self.wm.ball is not None:
-                        self.wm.turn_neck_to_object(self.wm.ball)
-    
-                    return
-    
-            # attack!
-            else:
-                # find the ball
-                if self.wm.ball is None or self.wm.ball.direction is None:
-                    self.wm.ah.turn(30)
-    
-                    return
-    
-                # kick it at the enemy goal
-                if self.wm.is_ball_kickable():
-                    self.wm.kick_to(self.enemy_goal_pos, 1.0)
-                    return
-                else:
-                    # move towards ball
-                    if -7 <= self.wm.ball.direction <= 7:
-                        self.wm.ah.dash(65)
-                    else:
-                        # face ball
-                        self.wm.ah.turn(self.wm.ball.direction / 2)
-    
-                    return
-
+            print "exceptions thrown, using fallback"
+            self.lookaround()
         
 
 
