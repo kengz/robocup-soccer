@@ -81,7 +81,7 @@ class Agent(baseAgent):
             self.enemy_goal_pos = (55, 0)
             self.own_goal_pos = (-55, 0)
 
-        if not self.wm.is_before_kick_off():
+        if not self.wm.is_before_kick_off() or self.wm.is_kick_off_us() or self.wm.is_playon():
             # The main decision loop
             return self.decisionLoop()
 

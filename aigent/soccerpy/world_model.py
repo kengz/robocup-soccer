@@ -323,6 +323,12 @@ class WorldModel:
         else:
             self.abs_body_dir = None
 
+    def is_playon(self):
+        """
+        Tells us whether it's play time
+        """
+        return self.play_mode == WorldModel.PlayModes.PLAY_ON
+
     def is_before_kick_off(self):
         """
         Tells us whether the game is in a pre-kickoff state.
