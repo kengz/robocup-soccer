@@ -11,7 +11,7 @@ To specify agent profile, go to `main.py`
 
 ```
 rcsoccersim
-python main.py
+[TEAM=<NAME>] python main.py
 ```
 
 ## Strategies

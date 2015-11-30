@@ -5,13 +5,14 @@ import time
 import random
 import sys
 import multiprocessing as mp
+import os
 
 # import agent types (positions)
 from aigent.soccerpy.agent import Agent as A0
 from aigent.agent_1 import Agent as A1
 
 # set team
-TEAM_NAME = 'Keng'
+TEAM_NAME = os.environ.get('TEAM') or 'Keng'
 NUM_PLAYERS = 11
 
 
