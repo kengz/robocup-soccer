@@ -40,10 +40,10 @@ class Agent(baseAgent):
             # used to flip x coords for other side
             side_mod = 1
             if self.wm.side == WorldModel.SIDE_R:
-                self.wm.side = WorldModel.SIDE_R
+                # self.wm.side = WorldModel.SIDE_R
                 side_mod = -1
-            else:
-                self.wm.side = WorldModel.SIDE_L
+            # else:
+                # self.wm.side = WorldModel.SIDE_L
 
             if self.wm.uniform_number == 1:
                 self.wm.teleport_to_point((-5 * side_mod, 30))
