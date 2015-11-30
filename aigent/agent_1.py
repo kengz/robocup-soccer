@@ -167,10 +167,10 @@ class Agent(baseAgent):
 
     # look around randomly
     def lookaround(self):
-        print "lookaround"
+        # print "lookaround"
         self.wm.ah.turn(random.randrange(-30,30))
-        if self.wm.ball is not None or self.wm.ball.direction is not None:
-            if -7 <= self.wm.ball.direction <= 7:
+        if self.wm.ball is not None:
+            if (self.wm.ball.direction is not None and -7 <= self.wm.ball.direction <= 7):
                 self.wm.ah.dash(65)
             else:
                 # face ball
