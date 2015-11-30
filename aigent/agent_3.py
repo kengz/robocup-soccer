@@ -318,7 +318,7 @@ class Agent(baseAgent):
         try:
             self.find_ball()
             if self.wm.get_distance_to_point(self.own_goal_pos) > 5:
-                print "overstepping"
+                # print "overstepping"
                 self.wm.turn_body_to_point(self.own_goal_pos)
                 self.wm.turn_body_to_point(self.own_goal_pos)
                 self.wm.turn_body_to_point(self.own_goal_pos)
