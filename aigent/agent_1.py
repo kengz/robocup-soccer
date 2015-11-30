@@ -245,9 +245,9 @@ class Agent(baseAgent):
     # dribble: turn body, kick, then run towards ball
     def dribble(self):
         print "dribbling"
-        self.wm.turn_body_to_point(self.enemy_goal_pos)
-        self.wm.align_neck_with_body()
-        self.wm.kick_to(self.enemy_goal_pos, 0.3)
+        # self.wm.turn_body_to_point(self.enemy_goal_pos)
+        # self.wm.align_neck_with_body()
+        self.wm.kick_to(self.enemy_goal_pos, 1.0)
         self.wm.ah.dash(50)
         return
 
