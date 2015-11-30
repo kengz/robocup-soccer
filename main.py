@@ -8,7 +8,7 @@ import multiprocessing as mp
 
 # import agent types (positions)
 from aigent.soccerpy.agent import Agent as A0
-from aigent.agent_0 import Agent as A1
+from aigent.agent_1 import Agent as A1
 
 # set team
 TEAM_NAME = 'Keng'
