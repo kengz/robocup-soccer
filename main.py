@@ -21,9 +21,9 @@ if __name__ == "__main__":
     # return type of agent: midfield, striker etc.
     def agent_type(position):
     	return {
-    		'0': A0,
+    		# '0': A0,
     		'1': A1,
-    	}.get(position, A0)
+    	}.get(position, A1)
 
     # spawn an agent of team_name, with position
     def spawn_agent(team_name, position):
