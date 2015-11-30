@@ -9,7 +9,10 @@ import os
 
 # import agent types (positions)
 from aigent.soccerpy.agent import Agent as A0
+# strikers
 from aigent.agent_1 import Agent as A1
+# defenders
+from aigent.agent_2 import Agent as A2
 
 # set team
 TEAM_NAME = 'Keng'
@@ -21,13 +24,12 @@ if __name__ == "__main__":
     # return type of agent: midfield, striker etc.
     def agent_type(position):
     	return {
-    		# '0': A0,
-            1: A1,
-            2: A1,
-            3: A1,
-            4: A1,
-            5: A1,
-    		6: A1,
+            2: A2,
+            3: A2,
+            4: A2,
+            6: A2,
+            6: A2,
+    		8: A2,
     	}.get(position, A1)
 
     # spawn an agent of team_name, with position
