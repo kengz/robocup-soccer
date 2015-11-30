@@ -131,9 +131,6 @@ class Agent(baseAgent):
 
     # look around randomly
     def defaultaction(self):
-        if self.wm.get_distance_to_point(self.own_goal_pos) > 15:
-            self.wm.turn_body_to_point(self.own_goal_pos)
-            self.wm.ah.dash(70)
         # print "def"
         # kick off!
         if self.wm.is_before_kick_off():
@@ -317,8 +314,10 @@ class Agent(baseAgent):
         try:
             self.find_ball()
             if self.wm.get_distance_to_point(self.own_goal_pos) > 15:
+                print "overstepping"
                 self.wm.turn_body_to_point(self.own_goal_pos)
                 self.wm.ah.dash(70)
+                return
             # if should shoot, full power
             # if self.shall_shoot():
                 # return self.shoot()
