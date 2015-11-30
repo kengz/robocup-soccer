@@ -216,7 +216,7 @@ class Agent(baseAgent):
     # defensive, when ball isn't ours, and has entered our side of the field
     def shall_move_to_defend(self):
         if self.wm.ball is not None or self.wm.ball.direction is not None:
-            b_coords = self.wm.get_object_absolute_coords(self.ball)
+            b_coords = self.wm.get_object_absolute_coords(self.wm.ball)
             return self.wm.is_ball_owned_by_enemy() and self.wm.euclidean_distance(self.own_goal_pos, b_coords) < 55.0
         return False
 
