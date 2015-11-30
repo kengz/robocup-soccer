@@ -332,7 +332,7 @@ class Agent(baseAgent):
                 if self.wm.uniform_number == 9:
                     if self.wm.is_ball_kickable():
                         # kick with 100% extra effort at enemy goal
-                        self.wm.kick_to(goal_pos, 1.0)
+                        self.wm.kick_to(self.enemy_goal_pos, 1.0)
                     else:
                         # move towards ball
                         if self.wm.ball is not None:
@@ -358,7 +358,7 @@ class Agent(baseAgent):
     
                 # kick it at the enemy goal
                 if self.wm.is_ball_kickable():
-                    self.wm.kick_to(goal_pos, 1.0)
+                    self.wm.kick_to(self.enemy_goal_pos, 1.0)
                     return
                 else:
                     # move towards ball
