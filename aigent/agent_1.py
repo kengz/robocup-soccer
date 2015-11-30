@@ -69,17 +69,17 @@ class Agent(baseAgent):
 
             return
 
+        # determine the enemy goal position
+        self.enemy_goal_pos = None
+        self.own_goal_pos = None
+        if self.wm.side == WorldModel.SIDE_R:
+            self.enemy_goal_pos = (-55, 0)
+            self.own_goal_pos = (55, 0)
         else:
-            # determine the enemy goal position
-            self.enemy_goal_pos = None
-            self.own_goal_pos = None
-            if self.wm.side == WorldModel.SIDE_R:
-                self.enemy_goal_pos = (-55, 0)
-                self.own_goal_pos = (55, 0)
-            else:
-                self.enemy_goal_pos = (55, 0)
-                self.own_goal_pos = (-55, 0)
+            self.enemy_goal_pos = (55, 0)
+            self.own_goal_pos = (-55, 0)
 
+        if not self.is_before_kick_off()
             # The main decision loop
             return self.decisionLoop()
 
