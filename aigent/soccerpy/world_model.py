@@ -530,13 +530,11 @@ class WorldModel:
         distances = []
         for p in self.players:
             # skip enemy and unknwon players
-            if p.side != self.side:
-                continue
+            if p.side == self.side:
+                # find their absolute position
+                p_coords = self.get_object_absolute_coords(p)
 
-            # find their absolute position
-            p_coords = self.get_object_absolute_coords(p)
-
-            distances.append((self.euclidean_distance(point, p_coords), p))
+                distances.append((self.euclidean_distance(point, p_coords), p))
 
         # return the nearest known teammate to the given point
         nearest = min(distances)[1]
@@ -552,13 +550,11 @@ class WorldModel:
         distances = []
         for p in self.players:
             # skip enemy and unknwon players
-            if p.side != self.side:
-                continue
+            if p.side == self.side:
+                # find their absolute position
+                p_coords = self.get_object_absolute_coords(p)
 
-            # find their absolute position
-            p_coords = self.get_object_absolute_coords(p)
-
-            distances.append((self.get_distance_to_point(p_coords), p))
+                distances.append((self.get_distance_to_point(p_coords), p))
 
         # return the nearest known teammate to the given point
         nearest = min(distances)[1]
@@ -574,13 +570,11 @@ class WorldModel:
         distances = []
         for p in self.players:
             # skip enemy and unknwon players
-            if p.side == self.side:
-                continue
+            if p.side != self.side:
+                # find their absolute position
+                p_coords = self.get_object_absolute_coords(p)
 
-            # find their absolute position
-            p_coords = self.get_object_absolute_coords(p)
-
-            distances.append((self.get_distance_to_point(p_coords), p))
+                distances.append((self.get_distance_to_point(p_coords), p))
 
         # return the nearest known teammate to the given point
         nearest = min(distances)[1]
