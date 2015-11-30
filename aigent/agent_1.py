@@ -189,7 +189,7 @@ class Agent(baseAgent):
 
         # kick it at the enemy goal
         if self.wm.is_ball_kickable():
-            self.wm.kick_to(goal_pos, 1.0)
+            self.wm.kick_to(self.enemy_goal_pos, 1.0)
             return
         else:
             # move towards ball
@@ -237,6 +237,9 @@ class Agent(baseAgent):
 
     # condition for dribbling, if can't shoot or pass
     def shall_dribble(self):
+        # find the ball
+        if self.wm.ball is None or self.wm.ball.direction is None:
+            self.wm.ah.turn(30)
         return self.wm.is_ball_kickable()
 
     # dribble: turn body, kick, then run towards ball
