@@ -13,6 +13,8 @@ from aigent.soccerpy.agent import Agent as A0
 from aigent.agent_1 import Agent as A1
 # defenders
 from aigent.agent_2 import Agent as A2
+# goalie
+from aigent.agent_3 import Agent as A3
 
 # set team
 TEAM_NAME = 'Keng'
