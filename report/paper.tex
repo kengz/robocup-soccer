@@ -1,0 +1,211 @@
+%description: Math 290 HW Template
+
+%%%%% Beginning of preamble %%%%%
+
+\documentclass[12pt]{article}  %What kind of document (article) and what size
+
+%Packages to load which give you useful commands
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{listings}
+
+%Sets the margins
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+%defines a few theorem-type environments
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{definition}{Definition}
+
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{fact}{Fact}
+\newtheorem{remark}{Remark}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+
+\renewcommand{\labelenumi}{\arabic{enumi}.}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.}
+\renewcommand{\labelenumiv}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}.\arabic{enumiv}.}
+\newlength{\alginputwidth}
+\newlength{\algboxwidth}
+\newcommand{\alginput}[1]{\makebox[1.5cm][l]{ {\sc Input:}} \parbox[t]{\alginputwidth}{{\it #1}}}
+\newcommand{\algoutput}[1]{\makebox[1.5cm][l]{ {\sc Output:}} \parbox[t]{\alginputwidth}{{\it #1}}}
+\newcommand{\algtitle}[1]{\underline{Algorithm \ {\bf #1}} \vspace*{1mm}\\}
+
+%%%%% End of preamble %%%%%
+
+
+
+
+
+
+
+\begin{document}
+
+\title{CS 420 Artificial Intelligence\\
+Robot Soccer Project \\
+Lafayette College \\
+Department of Computer Science
+}
+
+\author{
+{Wah Loon Keng}\thanks{
+Lafayette College,
+Easton, PA 18042, USA.
+kengw{\tt @}lafayette.edu.}
+\\
+\\
+{Advised by Prof. Chun Wai Liew}
+% \thanks{
+% Lafayette College,
+% Easton, PA 18042, USA.
+% dravesb{\tt @}lafayette.edu.}
+      % \affaddr{Department of Computer Science}\\
+%       \affaddr{Lafayette College}\\
+%       \affaddr{Easton, PA 18042, USA}\\
+%       \email{gexia@cs.lafayette.edu}
+}
+% \date{}
+\maketitle
+
+
+
+
+\section{Introduction} \label{intro}
+
+We implement a simple A.I. to play the Robocup Simulation League - a 2D soccer simulation game. The simulator and server are drawn from \emph{2D RoboCup Soccer Simulator$^{\ref{sim}}$}. 
+
+The server client we use is \emph{jasontbradshaw/soccerpy$^{\ref{client}}$} written in {\tt Python}. \emph{Soccerpy} handles the client-server communication and most of the backend details. This allows us to focus on writing the A.I. agent to play the game. 
+
+For the A.I. components, we draw basic inspirations from \emph{aima-python}$^{\ref{aima}}$ and the book \emph{Machine Learning}$^{\ref{Mitchell}}$
+
+
+\section{Description}
+
+To make an A.I. that performs well, we observe how a real-life soccer game is played, and how a human player would think and react. It is easy to see that a team of humans exhibit some degree of swarm intelligence. They plan and search for the optimal moves on two levels - locally and globally. The local behavior is used when they dribbled, move, overtake nearby enemies; the global behaviour is used when then pass, shoot, and move.
+
+This has inspired us to employ a hybrid of reflex, utility and goal-based agents. 
+
+For the environment variables, we consider for each player agent:
+
+\begin{enumerate}
+	\item the distance and angle to the goal posts
+	\item the distance and angle to the ball
+	\item the surrounding: the distance and angle of the nearest teammate
+	\item the surrounding: the distance and angle of the nearest enemy
+	\item the surrounding: is the path clear for ball, i.e. free of enemy interception
+	\item is the ball currently owned by our team
+	\item is the ball currently owned by the enemy team
+	\item is the ball kickable
+\end{enumerate}
+
+
+The information will allow the use of our heuristics below. Then, we list the basic actions available to a player; these will be extended based on the role of the agent.
+
+\begin{enumerate}
+	\item shoot (to the goal)
+	\item pass (to teammates)
+	\item move (run to strategic position, include dribbling)
+\end{enumerate}
+
+
+Then, for the agent roles we striker, defender, and goalie. They implement variations of the actions above based on reflex (e.g. if a ball is shootable), utility (e.g. it is better to pass than shoot), and goal-based (e.g. scoring matters the most in the game). 
+
+We describe the 3 types of agent in more details. The heuristics are given from the highest order of importance.
+
+{\bf Striker (agent\_1.py)}:
+
+\begin{enumerate}
+	\item \emph{shoot at the goal post}, if the ball is kickable, and agent is close to the goal post, and the path is clear to shoot. The agent finds the ball and the enemy goal post, and scan globally the shooting path is clear of enemies. It then aims at the enemy goal post, and calculate the optimal kicking power, and shoot the ball. This is the most important action as it scores the goal.
+	\item \emph{pass the ball}, if this is the next-best course of action. The agent does so if it is blocked or approached by enemies. To pass, it scans for nearby ally with a clear shooting path, then calculate the optimal kicking power based on distance, and pass the ball. Passing is also more energy-efficient than dribbling and running.
+	\item \emph{dribble}, if the above can't be done, then the agent tries to dribble the ball closer to the goal post.
+	\item \emph{move to the ball}, if enemy team currently owns the ball, and the agent is close enough to it.
+	\item \emph{move to defend}, the striker moves back a little to get the ball back, if the enemy has the ball, and is close to our goal post.
+	\item \emph{move to enemy goal post}, if our team has the ball. This is to prepare for attack and to accept a ball-pass from another teammate.
+\end{enumerate}
+
+
+{\bf Defender (agent\_2.py)}:
+
+\begin{enumerate}
+	\item \emph{Stay back}, always try to remain on our side of the field to prepare to defend.
+	\item \emph{pass the ball}, the same as from Striker agent.
+	\item \emph{dribble}, the same as from Striker agent.
+	\item \emph{move to ball}, the same as from Striker agent.
+	\item \emph{move to defend}, the same as from Striker agent.
+\end{enumerate}
+
+
+
+{\bf Goalie (agent\_3.py)}:
+
+\begin{enumerate}
+	\item \emph{Stay back}, always try to remain close of the goal post to prepare for enemy striker.
+	\item \emph{pass the ball}, the same as from Striker agent.
+	\item \emph{move to ball}, when enemy is carrying the ball close to our goal post.
+	\item \emph{move to defend}, the same as from Striker agent.
+\end{enumerate}
+
+
+
+
+
+
+\section{Implementation}
+
+First, we enclose the \emph{soccerpy} client code base into a module for exporting. We make {\tt soccerpy/agent.py} the basic agent class. Then we extend this base agent class polymorphically for the 3 agents described above.
+
+We modify in {\tt soccerpy} the modules {\tt agent, world\_model} to allow for the use of our heuristics. For example, we added the methods to get teammate, enemy, scan the agent's surrounding for enemy v.s. teammate, determine if the target path is clear from enemy interception, who owns the ball, distances among objects.
+
+The {\tt main.py} imports these 3 agents, initialize 5 strikers, 5 defenders, and a goalie, then set up the positioning.
+
+
+
+
+
+
+\subsection{Result}
+
+Our A.I. won the class tournament. From our observation, we attribute this to the striker heuristics of prioritizing goal-scoring, as well as a good aim, kicking power control, and path finding. 
+
+The positioning of the 3 different roles of A.I. agents are difficult to spot - it is something which we have not successfully controlled. However, the other action heuristics still work as expected; the agents pass, move, shoot guided by their roles, when observed in the debugger output.
+
+
+
+\section{References}
+
+
+\begin{enumerate}
+
+\item akym et. al., \emph{The RoboCup Soccer Simulator}. \url{http://sourceforge.net/projects/sserver/}\label{sim}
+
+\item jasontbradshaw, \emph{soccerpy}. \url{https://github.com/jasontbradshaw/soccerpy}\label{client}
+
+\item Norvig, Peter and Russell, Stuart, \emph{aima-python}. \url{https://code.google.com/p/aima-python/}\label{aima}
+
+\item Mitchell, Tom M, \emph{Machine Learning}. New York: McGraw-Hill, 1997.\label{Mitchell}
+
+
+
+\end{enumerate}
+
+
+
+\end{document} 
+

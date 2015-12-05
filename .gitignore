@@ -3,6 +3,16 @@ bin/
 bin-debug/
 bin-release/
 node_modules/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.log
+*.out
+*.synctex.gz
+*.cls
+*.toc
+*.fls
 
 # Other files and folders
 .settings/
