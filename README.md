@@ -1,5 +1,7 @@
 # Robocup
-RoboCup 2D Soccer Simulation League, written in Python, for my A.I. class project. In case you wonder, this won the class tournament, but its positioning is shitty tho.
+RoboCup 2D Soccer Simulation League, written in Python, for my A.I. class project. 
+
+In case you're wondering, this won the class tournament, but its positioning is shitty tho.
 
 
 ## Installation
@@ -21,7 +23,7 @@ rcsoccersim
 
 `aigent/aima_python/` is just for reference - that's the sample code from Norvig's *Artificial Intelligence, A Modern Approach*.
 
-`aigent/soccerpy/` contains the source for the agent and client. This is sourced from [jsontbradshaw/soccerpy](https://github.com/jasontbradshaw/soccerpy) under the MIT license. I've modified it to add several convinient methods, but minimal modification within this folder is needed.
+`aigent/soccerpy/` contains the source for the agent and client. This is sourced from [jsontbradshaw/soccerpy](https://github.com/jasontbradshaw/soccerpy) under the MIT license. I've modified it to add several convenient methods, but minimal modification within this folder is needed.
 
 `aigent/agent_*.py` is the real deal - it lets you configure different agent personalities and stategies. For example you can have striker, defender, goalie agents, which are `agent_1`, `agent_2` and `agent_3` respectively.
 
@@ -104,4 +106,4 @@ run a game, each think step collect data of outcome n prev actions, inject to db
 game ends, train autoencoder w/ all actions, then train real
 plug in the net, repeat above for evolution
 
-where to incorp action success: reward n cost? in selection of data, by evolution n natural selection - generation
+where to incorp action success: reward n cost? in selection of data, by evolution n natural selection
